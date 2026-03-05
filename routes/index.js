@@ -15,7 +15,19 @@ const messages = [
 ];
 
 router.get('/', (req, res) => {
-    res.render('index.js', {messages:messages})
+    res.render('index', {messages:messages})
+})
+
+router.get('/new', (req, res) => {
+  res.render('form');
+});
+
+router.post('/new', (req, res) => {
+    const username = req.body.username;
+    const text = req.body.text;
+
+    messages.push({ user: username, text: text, added: new Date() });
+    res.redirect('/')
 })
 
 
